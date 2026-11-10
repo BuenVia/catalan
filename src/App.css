@@ -1,38 +1,472 @@
-.App {
-  text-align: center;
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #5f6670;
+  --border: #dcdfe3;
+  --accent: #c8102e;       /* senyera red */
+  --accent-soft: #fdecee;
+  --highlight: #fcdd09;    /* senyera yellow */
+  --success: #1f8a3b;
+  --success-soft: #e3f5e8;
+  --error: #c0392b;
+  --error-soft: #fbe7e5;
+  --radius: 14px;
+  color-scheme: light;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --surface: #1f2226;
+    --text: #e8eaed;
+    --muted: #a0a6ae;
+    --border: #353a40;
+    --accent: #ff5a6e;
+    --accent-soft: #3a1f24;
+    --success: #4cc46e;
+    --success-soft: #17301f;
+    --error: #ff7a6b;
+    --error-soft: #3a1d1a;
+    color-scheme: dark;
   }
 }
 
-.App-header {
-  background-color: #282c34;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.app {
+  max-width: 680px;
+  margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Header */
+
+.app-header {
+  padding: 24px 16px 8px;
+  border-bottom: 4px solid var(--highlight);
+}
+
+.app-title {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.app-subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.page {
+  padding: 16px;
+}
+
+.section-heading {
+  font-size: 1.1rem;
+  margin: 24px 0 12px;
+}
+
+/* Buttons */
+
+.primary-button,
+.secondary-button {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  border: 2px solid var(--accent);
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #fff;
+}
+
+.primary-button:disabled {
+  background: var(--border);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--accent);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 8px 0;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Lesson list */
+
+.lesson-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lesson-card {
+  width: 100%;
+  display: flex;
+  gap: 16px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: left;
+  padding: 16px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: var(--radius);
 }
 
-.App-link {
-  color: #61dafb;
+.lesson-card:hover {
+  border-color: var(--accent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.lesson-icon {
+  font-size: 2.2rem;
+}
+
+.lesson-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-number {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.lesson-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.lesson-subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.lesson-best {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* Lesson intro / notes */
+
+.intro-title {
+  margin: 8px 0 0;
+  font-size: 1.6rem;
+}
+
+.intro-subtitle {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.note-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.note-card h4 {
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+
+.note-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.note-card td {
+  padding: 6px 4px;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.note-ca {
+  font-weight: 600;
+  width: 55%;
+}
+
+.note-es {
+  color: var(--muted);
+}
+
+.speak-button {
+  background: none;
+  border: none;
+  padding: 0 6px 0 0;
+  font-size: 0.9rem;
+}
+
+.note-tip {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.page > .primary-button {
+  margin: 16px 0;
+}
+
+/* Exercise session */
+
+.session {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.session-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--muted);
+  padding: 4px 8px;
+}
+
+.progress {
+  flex: 1;
+  height: 14px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--success);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.session-body {
+  flex: 1;
+  padding: 8px 16px 24px;
+}
+
+.instruction {
+  font-size: 1.3rem;
+  margin: 8px 0 16px;
+}
+
+.prompt {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.hint {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.text-answer input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.15rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.text-answer input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.special-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.special-characters button {
+  min-width: 38px;
+  padding: 6px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom-width: 3px;
+  border-radius: 8px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.option {
+  padding: 14px;
+  font-size: 1.1rem;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: var(--radius);
+}
+
+.option.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.listen-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.play-button {
+  padding: 16px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+}
+
+.play-button.is-slow {
+  background: var(--surface);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.warning {
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: var(--accent-soft);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.session-footer {
+  position: sticky;
+  bottom: 0;
+  padding: 16px;
+  background: var(--bg);
+  border-top: 2px solid var(--border);
+}
+
+.session-footer.is-correct,
+.session-footer.is-typo {
+  background: var(--success-soft);
+  border-color: var(--success);
+}
+
+.session-footer.is-wrong {
+  background: var(--error-soft);
+  border-color: var(--error);
+}
+
+.feedback {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.is-correct .feedback strong,
+.is-typo .feedback strong {
+  color: var(--success);
+}
+
+.is-wrong .feedback strong {
+  color: var(--error);
+}
+
+.feedback-answer {
+  font-weight: 600;
+}
+
+.is-correct .primary-button,
+.is-typo .primary-button {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.is-wrong .primary-button {
+  background: var(--error);
+  border-color: var(--error);
+}
+
+/* Results */
+
+.results {
+  text-align: center;
+  padding-top: 48px;
+}
+
+.results-emoji {
+  font-size: 4rem;
+}
+
+.results-lesson {
+  color: var(--muted);
+  margin: 0;
+}
+
+.results-score {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.results-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
 }
