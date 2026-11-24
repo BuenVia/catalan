@@ -1,6 +1,7 @@
-// Best result per lesson, kept in localStorage: { [lessonId]: { correct, total } }.
+// Best result per lesson and practice mode, kept in localStorage:
+//   { [lessonId]: { [mode]: { correct, total } } }
 
-const STORAGE_KEY = 'catalan-a1-progress';
+const STORAGE_KEY = 'catalan-a1-progress-v2';
 
 export function loadProgress() {
   try {
@@ -10,15 +11,15 @@ export function loadProgress() {
   }
 }
 
-export function saveResult(lessonId, correct, total) {
+export function saveResult(lessonId, mode, correct, total) {
   const progress = loadProgress();
-  const previous = progress[lessonId];
+  const previous = progress[lessonId]?.[mode];
   if (!previous || correct > previous.correct || total !== previous.total) {
-    progress[lessonId] = { correct, total };
+    progress[lessonId] = { ...progress[lessonId], [mode]: { correct, total } };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     } catch {
-      // Storage unavailable (private mode etc.) — progress just isn't remembered.
+      // Storage unavailable (private mode etc.): progress just isn't remembered.
     }
   }
   return progress;
