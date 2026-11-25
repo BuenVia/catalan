@@ -2,9 +2,10 @@
 
 const strings = {
   appTitle: 'Català A1',
-  appSubtitle: 'First steps in Catalan, from greetings to everyday verbs',
-  lessonsHeading: 'Lessons',
+  appSubtitle: 'First steps in Catalan: grammar basics, everyday situations and the most common verbs',
   lessonNumber: (n) => `Lesson ${n}`,
+  lessonCount: (n) => `${n} lessons`,
+  practised: (n, total) => `${n} of ${total} practised`,
   back: '← Back',
   exit: 'Leave practice',
   listenTo: (text) => `Listen to “${text}”`,

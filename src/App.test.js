@@ -57,3 +57,33 @@ it('asks the sentences in a shuffled order, each exactly once', () => {
   expect(asked).not.toEqual(inLessonOrder);
   expect([...asked].sort()).toEqual([...inLessonOrder].sort());
 });
+
+it('lists both sections and opens a lesson from the second', () => {
+  render(<App />);
+  expect(screen.getByRole('heading', { name: 'Section 1: Essentials' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Section 2: Everyday situations' })).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText('Qui soc? Who am I?'));
+  expect(screen.getByRole('heading', { name: 'Task: greet and introduce yourself' })).toBeInTheDocument();
+  expect(screen.getByText('Soc de Manchester.')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Read English, write Catalan' })).toBeInTheDocument();
+});
+
+it('opens the verbs section on its own page, and returns there from a verb lesson', () => {
+  render(<App />);
+  // The home screen shows only a card for it, not its lessons.
+  expect(screen.queryByText('Ser: to be')).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: /Section 3: The 20 most common verbs/ }));
+
+  expect(screen.getByRole('heading', { name: 'Section 3: The 20 most common verbs' })).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: 'Section 1: Essentials' })).not.toBeInTheDocument();
+  expect(screen.getAllByRole('button', { name: /^Lesson \d+/ })).toHaveLength(20);
+
+  fireEvent.click(screen.getByText('Ser: to be'));
+  expect(screen.getByRole('heading', { name: 'Present tense' })).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: '← Back' }));
+  expect(screen.getByRole('heading', { name: 'Section 3: The 20 most common verbs' })).toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('button', { name: '← Back' }));
+  expect(screen.getByRole('heading', { name: 'Section 1: Essentials' })).toBeInTheDocument();
+});

@@ -93,6 +93,31 @@ button:disabled {
   margin: 24px 0 12px;
 }
 
+.lesson-section + .lesson-section {
+  margin-top: 32px;
+}
+
+.lesson-section .section-heading {
+  margin-bottom: 4px;
+}
+
+.section-description {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 12px;
+}
+
+.section-card .section-description {
+  margin: 4px 0 0;
+}
+
+.section-arrow {
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
 /* Buttons */
 
 .primary-button,
