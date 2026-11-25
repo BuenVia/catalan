@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import t from './strings';
-import lessons from './lessons';
+import lessons, { sections, sectionOf } from './lessons';
 import { loadProgress, saveResult } from './utils/progress';
 import LessonList from './components/LessonList';
 import LessonScreen from './components/LessonScreen';
@@ -10,6 +10,7 @@ import Results from './components/Results';
 
 // Navigation is plain state, no router: screen is one of
 //   { name: 'home' }
+//   { name: 'section', sectionId }                 (a section with its own page)
 //   { name: 'lesson', lessonId }
 //   { name: 'practice', lessonId, mode, attempt }   (attempt changes to restart a round)
 //   { name: 'results', lessonId, mode, correct, total }
@@ -20,6 +21,16 @@ function App() {
   const lesson = lessons.find((l) => l.id === screen.lessonId);
 
   const goHome = () => setScreen({ name: 'home' });
+  const openSection = (sectionId) => {
+    setScreen({ name: 'section', sectionId });
+    window.scrollTo(0, 0);
+  };
+  // A lesson's back button returns to its section's page, if it has one.
+  const leaveLesson = () => {
+    const section = sectionOf(lesson.id);
+    if (section.ownPage) openSection(section.id);
+    else goHome();
+  };
   const openLesson = (lessonId) => {
     setScreen({ name: 'lesson', lessonId });
     window.scrollTo(0, 0);
@@ -40,10 +51,21 @@ function App() {
         </header>
       )}
 
-      {screen.name === 'home' && <LessonList lessons={lessons} progress={progress} onSelect={openLesson} />}
+      {screen.name === 'home' && (
+        <LessonList sections={sections} progress={progress} onSelect={openLesson} onOpenSection={openSection} />
+      )}
+
+      {screen.name === 'section' && (
+        <LessonList
+          sections={sections.filter((section) => section.id === screen.sectionId)}
+          progress={progress}
+          onSelect={openLesson}
+          onBack={goHome}
+        />
+      )}
 
       {screen.name === 'lesson' && (
-        <LessonScreen lesson={lesson} progress={progress[lesson.id]} onPractise={practise} onBack={goHome} />
+        <LessonScreen lesson={lesson} progress={progress[lesson.id]} onPractise={practise} onBack={leaveLesson} />
       )}
 
       {screen.name === 'practice' && (
