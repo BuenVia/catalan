@@ -7,13 +7,22 @@ import TextAnswer from './exercises/TextAnswer';
 import ListenPrompt from './exercises/ListenPrompt';
 import SpeakPrompt from './exercises/SpeakPrompt';
 
-// One round of a lesson in one mode, as in BarceLang: every sentence once, in a random order.
-// The score is the number answered correctly.
+// One round in one mode, as in BarceLang: every sentence once (or a random `roundSize` of them),
+// in a random order. The score is the number answered correctly. `onAnswer(exercise, passed)` is
+// called as each answer is checked, and `onRoundComplete()` once the last one has been.
 //   translate  read the English, type the Catalan (any accepted wording passes)
 //   listen     hear the Catalan, type exactly what was said
 //   speak      read the English, say the Catalan (any accepted wording passes)
-export default function PracticeSession({ lesson, mode, onFinish, onExit }) {
-  const [queue] = useState(() => shuffle(lesson.exercises));
+export default function PracticeSession({
+  exercises,
+  roundSize = exercises.length,
+  mode,
+  onAnswer = () => {},
+  onRoundComplete = () => {},
+  onFinish,
+  onExit,
+}) {
+  const [queue] = useState(() => shuffle(exercises).slice(0, roundSize));
   const [position, setPosition] = useState(0);
   const [value, setValue] = useState('');
   // The recogniser's guesses at the last spoken attempt, best first, waiting to be submitted.
@@ -43,6 +52,8 @@ export default function PracticeSession({ lesson, mode, onFinish, onExit }) {
     }
     setVerdict(result);
     if (result === CORRECT) setScore((s) => s + 1);
+    onAnswer(exercise, result === CORRECT);
+    if (isLast) onRoundComplete();
   }
 
   function next() {

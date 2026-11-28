@@ -40,7 +40,7 @@ The ending shows who is acting, so **Parlo català** is enough. Use **jo** or **
     { id: 'ca-a1-080', english: 'Do you (vosaltres) buy bread here?', pattern: 'Compreu pa aquí?', alsoAccepted: ['Vosaltres compreu pa aquí?'] },
     { id: 'ca-a1-081', english: 'They eat at two.', pattern: '{|Ells |Elles }mengen a les dues.' },
     { id: 'ca-a1-082', english: 'I listen to the radio.', pattern: '{|Jo }escolto la ràdio.' },
-    { id: 'ca-a1-083', english: 'You (tu) watch a lot of television.', pattern: '{|Tu }mires molt la televisió.', alsoAccepted: ['{|Tu }mires molta televisió.'] },
+    { id: 'ca-a1-083', english: 'You (tu) watch a lot of television.', pattern: '{|Tu }mires molt la televisió.', alsoAccepted: ['{|Tu }mires molta televisió.', '{|Tu }veus molt la televisió.'] },
     { id: 'ca-a1-084', english: 'The train arrives at eight.', pattern: 'El tren arriba a les vuit.' },
     { id: 'ca-a1-085', english: 'I take the bus every day.', pattern: "{|Jo }agafo l'autobús cada dia.", alsoAccepted: ["{|Jo }agafo l'autobús tots els dies."] },
     { id: 'ca-a1-086', english: 'Do you (vostè) speak French?', pattern: 'Parla francès?', alsoAccepted: ['Vostè parla francès?'] },

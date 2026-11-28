@@ -47,7 +47,7 @@ Catalan counts quarters towards the next hour:
     { id: 'ca-a1-130', english: "I'm thirty-one.", pattern: '{|Jo }tinc trenta-un anys.' },
     { id: 'ca-a1-131', english: 'There are twelve people.', pattern: 'Hi ha dotze persones.' },
     { id: 'ca-a1-132', english: 'In the morning, I drink a coffee.', pattern: 'Al matí, {|jo }bec un cafè.' },
-    { id: 'ca-a1-133', english: 'At night, we watch television.', pattern: 'A la nit, {|nosaltres }mirem la televisió.' },
+    { id: 'ca-a1-133', english: 'At night, we watch television.', pattern: 'A la nit, {|nosaltres }mirem la televisió.', alsoAccepted: ['A la nit, {|nosaltres }veiem la televisió.'] },
     { id: 'ca-a1-134', english: 'The shop closes on Sundays.', pattern: 'La botiga tanca els diumenges.', alsoAccepted: ['La botiga tanca el diumenge.'] },
     { id: 'ca-a1-135', english: 'It costs fifteen euros.', pattern: 'Costa quinze euros.' },
   ],

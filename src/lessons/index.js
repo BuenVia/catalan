@@ -1,9 +1,9 @@
-// The home screen's sections, each a list of lessons in teaching order. Section 1 is copied from
-// BarceLang's CatalanA1Lessons.kt. Section 2, in ara/, follows the nine units of the CPNL's A1 course
-// "ARA. Català per començar", one lesson per unit, ending with that unit's task. Section 3, in verbs/,
-// has one lesson per verb for the 20 most common verbs, present tense only. A section with
-// `ownPage` is shown on the home screen as a single card that opens a page listing its lessons.
-// To add a lesson, create a file with the same shape and add it to its section's list.
+// The app's three modules, each a list of lessons in teaching order. The home screen shows one
+// button per module, which opens a page listing its lessons. Grammar, in grammar/, is copied from
+// BarceLang's CatalanA1Lessons.kt. CPNL, in ara/, follows the nine units of the CPNL's A1 course
+// "ARA. Català per començar", one lesson per unit, ending with that unit's task. Verbs, in verbs/,
+// has one lesson per verb for the 20 most common verbs, present tense only.
+// To add a lesson, create a file with the same shape and add it to its module's list.
 //
 // Lesson shape:
 //   id           what saved progress refers to: never change or reuse one
@@ -17,22 +17,22 @@
 //                See src/utils/answers.js.
 
 import { prepareExercise } from '../utils/answers';
-import greetings from './01-greetings-and-introductions';
-import serAndEstar from './02-ser-and-estar';
-import articles from './03-articles-and-gender';
-import plurals from './04-plurals-and-adjectives';
-import tenir from './05-tenir-and-hi-ha';
-import rooms from './06-rooms-and-furniture';
-import position from './07-where-things-are-and-ordinal-numbers';
-import arVerbs from './08-present-tense-ar-verbs';
-import otherVerbs from './09-present-tense-other-verbs';
-import irregularVerbs from './10-anar-fer-voler-and-poder';
-import street from './11-your-street-and-local-services';
-import directions from './12-asking-for-and-giving-directions';
-import numbers from './13-numbers-days-and-the-time';
-import questions from './14-asking-questions';
-import family from './15-family-and-possessives';
-import agradar from './16-agradar-and-negatives';
+import greetings from './grammar/01-greetings-and-introductions';
+import serAndEstar from './grammar/02-ser-and-estar';
+import articles from './grammar/03-articles-and-gender';
+import plurals from './grammar/04-plurals-and-adjectives';
+import tenir from './grammar/05-tenir-and-hi-ha';
+import rooms from './grammar/06-rooms-and-furniture';
+import position from './grammar/07-where-things-are-and-ordinal-numbers';
+import arVerbs from './grammar/08-present-tense-ar-verbs';
+import otherVerbs from './grammar/09-present-tense-other-verbs';
+import irregularVerbs from './grammar/10-anar-fer-voler-and-poder';
+import street from './grammar/11-your-street-and-local-services';
+import directions from './grammar/12-asking-for-and-giving-directions';
+import numbers from './grammar/13-numbers-days-and-the-time';
+import questions from './grammar/14-asking-questions';
+import family from './grammar/15-family-and-possessives';
+import agradar from './grammar/16-agradar-and-negatives';
 import quiSoc from './ara/01-qui-soc';
 import laCasa from './ara/02-la-casa';
 import elMeuCarrer from './ara/03-el-meu-carrer';
@@ -67,9 +67,10 @@ const prepare = (lesson) => ({ ...lesson, exercises: lesson.exercises.map(prepar
 
 export const sections = [
   {
-    id: 'essentials',
-    title: 'Section 1: Essentials',
+    id: 'grammar',
+    title: 'Grammar',
     description: 'Grammar step by step, from greetings to everyday verbs',
+    icon: '📘',
     lessons: [
       greetings,
       serAndEstar,
@@ -91,23 +92,23 @@ export const sections = [
   },
   {
     id: 'ara',
-    title: 'Section 2: Everyday situations',
-    description: 'Following the units of “ARA. Català per començar”, the CPNL’s A1 course, each ending with its task',
+    title: 'CPNL',
+    description: 'Everyday situations, following the units of “ARA. Català per començar”, the CPNL’s A1 course, each ending with its task',
+    icon: '🏙️',
     lessons: [quiSoc, laCasa, elMeuCarrer, queHiFem, laNevera, elCos, lAjuntament, cadaDia, queNecessito],
   },
   {
     id: 'verbs',
-    title: 'Section 3: The 20 most common verbs',
-    description: 'One verb per lesson, roughly from most to least common, in the present tense and in everyday sentences',
+    title: 'Verbs',
+    description: 'The 20 most common verbs, one per lesson, roughly from most to least common, in the present tense and in everyday sentences',
     icon: '🔤',
-    ownPage: true,
     lessons: [
       ser, haver, estar, tenirVerb, fer, poder, dir, anar, veure, donar, saber, voler, venir, posar, passar, sortir, quedar, parlar, portar, trobar,
     ],
   },
 ].map((section) => ({ ...section, lessons: section.lessons.map(prepare) }));
 
-// Every lesson, across sections.
+// Every lesson, across modules.
 const lessons = sections.flatMap((section) => section.lessons);
 
 export const sectionOf = (lessonId) => sections.find((section) => section.lessons.some((l) => l.id === lessonId));

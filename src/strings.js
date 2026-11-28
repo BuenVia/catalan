@@ -62,6 +62,24 @@ const strings = {
   sentencesCorrect: 'sentences correct',
   retry: 'Practise again',
   backToLesson: 'Back to lesson',
+  finish: 'Finish',
+  backToSentences: 'Back to the sentences',
+
+  review: 'Review',
+  reviewsDue: (n) => (n === 1 ? '1 review due' : `${n} reviews due`),
+  reviewMode: { translate: 'Read English, write Catalan', listen: 'Hear Catalan, transcribe it' },
+  allCaughtUp: (days) =>
+    `All caught up. Next review: ${days <= 0 ? 'later today' : days === 1 ? 'tomorrow' : `in ${days} days`}.`,
+  noReviewsYet: 'Practise a lesson and its sentences will come back here for review.',
+  syncOffline: 'Couldn’t reach the progress database. Your answers are saved here and will be uploaded later.',
+
+  completedLessons: 'Completed lessons',
+  completedSummary: (n) =>
+    n === 0 ? 'None yet' : n === 1 ? 'Mixed practice from 1 lesson' : `Mixed practice from ${n} lessons`,
+  completedOn: (date) => `Completed ${date}`,
+  noCompletedLessons:
+    'Finish a writing round and a listening round of a lesson and its sentences will appear here.',
+  practiseRandom: (n) => `Practise ${n} random sentences`,
 };
 
 export default strings;

@@ -529,3 +529,25 @@ button:disabled {
   gap: 10px;
   margin-top: 24px;
 }
+
+/* Reviews and completed lessons */
+
+.review-panel {
+  margin: 16px 0 12px;
+}
+
+.completed-card {
+  margin-bottom: 20px;
+}
+
+.lesson-card.is-completed {
+  border-color: var(--success);
+  background: var(--success-soft);
+}
+
+.lesson-completed {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: var(--success);
+  font-weight: 600;
+}
